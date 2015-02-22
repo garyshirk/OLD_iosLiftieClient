@@ -18,6 +18,7 @@
 		4E4611E01A9A213C00116822 /* LiftieClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4611DF1A9A213C00116822 /* LiftieClientTests.swift */; };
 		4E4611EA1A9A22DD00116822 /* Resort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4611E91A9A22DD00116822 /* Resort.swift */; };
 		4E57FEEE1A9A392C00FED8ED /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E37DADF1A9A3768004C9017 /* SwiftyJSON.framework */; };
+		4E57FEFC1A9A3C1D00FED8ED /* DataAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E57FEFB1A9A3C1D00FED8ED /* DataAccessManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		4E4611DE1A9A213C00116822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E4611DF1A9A213C00116822 /* LiftieClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftieClientTests.swift; sourceTree = "<group>"; };
 		4E4611E91A9A22DD00116822 /* Resort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resort.swift; sourceTree = "<group>"; };
+		4E57FEFB1A9A3C1D00FED8ED /* DataAccessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataAccessManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,15 +150,16 @@
 		4E4611C11A9A213C00116822 /* LiftieClient */ = {
 			isa = PBXGroup;
 			children = (
-				4E37DAB11A9A3767004C9017 /* SwiftyJsonLib */,
 				4E4611C41A9A213C00116822 /* AppDelegate.swift */,
 				4E4611C91A9A213C00116822 /* MasterViewController.swift */,
 				4E4611CB1A9A213C00116822 /* DetailViewController.swift */,
+				4E57FEFB1A9A3C1D00FED8ED /* DataAccessManager.swift */,
 				4E4611CD1A9A213C00116822 /* Main.storyboard */,
 				4E4611D01A9A213C00116822 /* Images.xcassets */,
 				4E4611D21A9A213C00116822 /* LaunchScreen.xib */,
 				4E4611C61A9A213C00116822 /* LiftieClient.xcdatamodeld */,
 				4E4611E91A9A22DD00116822 /* Resort.swift */,
+				4E37DAB11A9A3767004C9017 /* SwiftyJsonLib */,
 				4E4611C21A9A213C00116822 /* Supporting Files */,
 			);
 			path = LiftieClient;
@@ -329,6 +332,7 @@
 				4E4611C81A9A213C00116822 /* LiftieClient.xcdatamodeld in Sources */,
 				4E37DACA1A9A3767004C9017 /* SwiftyJSON.swift in Sources */,
 				4E4611CA1A9A213C00116822 /* MasterViewController.swift in Sources */,
+				4E57FEFC1A9A3C1D00FED8ED /* DataAccessManager.swift in Sources */,
 				4E4611CC1A9A213C00116822 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

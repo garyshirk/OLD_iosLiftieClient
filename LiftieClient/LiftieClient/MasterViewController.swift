@@ -8,11 +8,15 @@
 
 import UIKit
 import CoreData
+import SwiftyJSON
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
 
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
+    
+    //let resortIds: [String]! = ["aspen-mountain", "bolton-valley", "canyons"]
+    let resortIds: [String]! = ["canyons"]
 
 
     override func awakeFromNib() {
@@ -26,14 +30,51 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        //self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        self.navigationItem.rightBarButtonItem = addButton
+        //let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+        //self.navigationItem.rightBarButtonItem = addButton
+        
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
         }
+        
+        for id in resortIds {
+    
+            DataAccessManager.getLiftieDataForId(id, withSuccess: {(liftieData) -> Void in
+            
+                let json = JSON(data: liftieData)
+                
+                let newResort = NSEntityDescription.insertNewObjectForEntityForName("Resort", inManagedObjectContext: self.managedObjectContext!) as? Resort
+                
+                if let resortId = json["id"].stringValue as NSString? {
+                    println("resort id: \(resortId)")
+                    newResort!.id = resortId
+                }
+                
+                if let resortName = json["name"].stringValue as NSString? {
+                    println("resort name: \(resortName)")
+                    newResort!.name = resortName
+                }
+                
+                if let liftStatusDict = json["lifts"]["status"].dictionaryValue as Dictionary? {
+                    //println("lift dictionary: \(liftStatusDict)")
+                    
+                    for (liftName, liftStatus) in liftStatusDict {
+                        println("\(liftName) \t \(liftStatus)")
+                    }
+                }
+                
+                let context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+                var error: NSError? = nil
+                if !context!.save(&error) {
+                    println(error?.localizedDescription)
+                }
+                
+            })
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
