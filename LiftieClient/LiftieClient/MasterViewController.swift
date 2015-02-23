@@ -10,14 +10,16 @@ import UIKit
 import CoreData
 import SwiftyJSON
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
-
+class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate
+    {
+    
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
-    //let resortIds: [String]! = ["aspen-mountain", "bolton-valley", "canyons"]
-    let resortIds: [String]! = ["canyons"]
-
+    var isInitialSyncComplete = false
+    
+    let resortIds: [String]! = ["aspen-mountain", "bolton-valley", "canyons"]
+    //let resortIds: [String]! = ["canyons"]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,15 +34,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Do any additional setup after loading the view, typically from a nib.
         //self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
-        //let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        //self.navigationItem.rightBarButtonItem = addButton
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+//        self.navigationItem.rightBarButtonItem = addButton
         
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = controllers[controllers.count-1].topViewController as? DetailViewController
         }
         
-        for id in resortIds {
+        
+        for var index = 0; index < resortIds.count; ++index {
+            
+            let id = self.resortIds[index]
     
             DataAccessManager.getLiftieDataForId(id, withSuccess: {(liftieData) -> Void in
             
@@ -66,15 +71,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                     }
                 }
                 
-                let context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
-                var error: NSError? = nil
-                if !context!.save(&error) {
-                    println(error?.localizedDescription)
-                }
-                
             })
+            
+            if index == self.resortIds.count - 1 {
+                self.isInitialSyncComplete = true
+            }
         }
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,22 +85,23 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     func insertNewObject(sender: AnyObject) {
-        let context = self.fetchedResultsController.managedObjectContext
-        let entity = self.fetchedResultsController.fetchRequest.entity!
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as NSManagedObject
-             
-        // If appropriate, configure the new managed object.
-        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-        newManagedObject.setValue(NSDate(), forKey: "id")
-             
-        // Save the context.
-        var error: NSError? = nil
-        if !context.save(&error) {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //println("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
+        
+//        let context = self.fetchedResultsController.managedObjectContext
+//        let entity = self.fetchedResultsController.fetchRequest.entity!
+//        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as NSManagedObject
+//             
+//        // If appropriate, configure the new managed object.
+//        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+//        newManagedObject.setValue(NSDate(), forKey: "id")
+//             
+//        // Save the context.
+//        var error: NSError? = nil
+//        if !context.save(&error) {
+//            // Replace this implementation with code to handle the error appropriately.
+//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+//            //println("Unresolved error \(error), \(error.userInfo)")
+//            abort()
+//        }
     }
 
     // MARK: - Segues
@@ -196,49 +199,49 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }    
     var _fetchedResultsController: NSFetchedResultsController? = nil
 
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
-    }
-
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
-        switch type {
-            case .Insert:
-                self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            case .Delete:
-                self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-            default:
-                return
-        }
-    }
-
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
-        switch type {
-            case .Insert:
-                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            case .Delete:
-                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            case .Update:
-                self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
-            case .Move:
-                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            default:
-                return
-        }
-    }
+//    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+//        self.tableView.beginUpdates()
+//    }
+//
+//    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+//        switch type {
+//            case .Insert:
+//                self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+//            case .Delete:
+//                self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+//            default:
+//                return
+//        }
+//    }
+//
+//    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+//        switch type {
+//            case .Insert:
+//                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+//            case .Delete:
+//                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+//            case .Update:
+//                self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
+//            case .Move:
+//                tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+//                tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+//            default:
+//                return
+//        }
+//    }
 
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
+        //self.tableView.endUpdates()
+        
+        if isInitialSyncComplete {
+            let context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+            var error: NSError? = nil
+            if !context!.save(&error) {
+                println(error?.localizedDescription)
+            }
+            
+            self.tableView.reloadData()
+        }
     }
-
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-         // In the simplest, most efficient, case, reload the table view.
-         self.tableView.reloadData()
-     }
-     */
-
 }
 
