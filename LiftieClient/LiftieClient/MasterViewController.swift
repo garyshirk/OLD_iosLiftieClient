@@ -18,7 +18,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     var isInitialSyncComplete = false
     
-    let resortIds: [String]! = ["aspen-mountain", "bolton-valley", "canyons"]
+    let resortIds: [String]! = ["aspen-mountain", "bolton-valley", "canyons", "diamondpeak", "gore-mountain"]
     //let resortIds: [String]! = ["canyons"]
 
     override func awakeFromNib() {
@@ -111,7 +111,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let indexPath = self.tableView.indexPathForSelectedRow() {
             let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
                 let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
-                controller.detailItem = object
+                //controller.detailItem = object
+                controller.resort = object as Resort
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
