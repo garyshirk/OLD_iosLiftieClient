@@ -100,13 +100,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                     }
                 }
                 
-//                if let liftStatusDict = json["lifts"]["status"].dictionaryValue as Dictionary? {
-//                    //println("lift dictionary: \(liftStatusDict)")
-//                    
-//                    for (liftName, liftStatus) in liftStatusDict {
-//                        //println("\(liftName) \t \(liftStatus)")
-//                    }
-//                }
+                if let liftStatusDict = json["lifts"]["status"].dictionaryValue as Dictionary? {
+                    //println("lift dictionary: \(liftStatusDict)")
+                    
+                    for (liftName, liftStatus) in liftStatusDict {
+                        //println("\(liftName) \t \(liftStatus)")
+                    }
+                }
                 
             })
             
