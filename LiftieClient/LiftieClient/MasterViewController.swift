@@ -70,6 +70,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                         
                         if count > 0 {
                             
+                            // resort for current resortId already exists in core data
+                            // next check if the lift timestamp has expired
+                            
                             println("liftTimeRetrieved: \(liftTimeRetrieved)")
                             
                             var liftTimeStored = (results[0].liftTimestamp)!.timeIntervalSince1970
@@ -81,12 +84,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                             let oneMinute: Double = 60 * 1000
                             let deltaTime = nowTimeLong - liftTimeStored
                             if deltaTime > oneMinute {
+                                // if lift timestamp expired, update the resort with the new timestamp
                                 var resort = results[0]
                                 resort.liftTimestamp = NSDate(timeIntervalSince1970: liftTimeRetrieved)
                                 println("resort.liftTimeStamp: \(resort.liftTimestamp)")
+                                
+                                // update the lift status for this resort
+                                // TBD
                             }
                             
                         } else {
+                            
+                            // resort for the current resortId was not found in core data
                             
                             var resortName: NSString = "error"
                             if let name = json["name"].stringValue as NSString? {
@@ -95,19 +104,38 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                             
                             var liftTimeStamp = NSDate(timeIntervalSince1970: liftTimeRetrieved)
                             
-                            self.createNewResortWithId(resortId, resortName: resortName, liftTimeStamp: liftTimeStamp)
+                            self.insertNewResortWithId(resortId, resortName: resortName, liftTimeStamp: liftTimeStamp)
+                            
+                            if let liftStatusJsonDict = json["lifts"]["status"].dictionaryValue as Dictionary? {
+                                
+                                
+                                var liftNameArr = [String](liftStatusJsonDict.keys)
+                                
+                                for liftName in liftNameArr {
+                                    
+                                    let liftEntity = NSEntityDescription.insertNewObjectForEntityForName("Lift", inManagedObjectContext: self.managedObjectContext!) as? Lift
+                                    liftEntity?.name = liftName
+                                    liftEntity?.resortId = resortId
+                                    
+                                    var liftStatus: String = liftStatusJsonDict[liftName]!.string!
+                                    liftEntity?.status = liftStatus
+                                    
+                                    println("resortId: \(resortId), liftName: \(liftName), liftStatus: \(liftStatus)")
+                                   
+                                    
+                                }
+                                
+                                
+                                
+//                                println("lift dictionary: \(liftStatusJsonDict)")
+//                                for (liftName, liftStatus) in liftStatusJsonDict {
+//                                    println("\(liftName) \t \(liftStatus)")
+//                                }
+                               
+                            }
                         }
                     }
                 }
-                
-                if let liftStatusDict = json["lifts"]["status"].dictionaryValue as Dictionary? {
-                    //println("lift dictionary: \(liftStatusDict)")
-                    
-                    for (liftName, liftStatus) in liftStatusDict {
-                        //println("\(liftName) \t \(liftStatus)")
-                    }
-                }
-                
             })
             
             if index == self.resortIds.count - 1 {
@@ -121,15 +149,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // Dispose of any resources that can be recreated.
     }
     
-    func createNewResortWithId(resortId: NSString, resortName: NSString, liftTimeStamp: NSDate) {
+    func insertNewResortWithId(resortId: NSString, resortName: NSString, liftTimeStamp: NSDate) {
         
-        let newResort = NSEntityDescription.insertNewObjectForEntityForName("Resort", inManagedObjectContext: self.managedObjectContext!) as? Resort
+        let resortEntity = NSEntityDescription.insertNewObjectForEntityForName("Resort", inManagedObjectContext: self.managedObjectContext!) as? Resort
         
-        newResort?.id = resortId
-        newResort?.name = resortName
-        newResort?.liftTimestamp = liftTimeStamp
+        resortEntity?.id = resortId
+        resortEntity?.name = resortName
+        resortEntity?.liftTimestamp = liftTimeStamp
     }
     
+    func insertLift(lifts: Dictionary<String, String>, forResortId resortId: NSString) {
+        
+    }
     
     func insertNewObject(sender: AnyObject) {
         

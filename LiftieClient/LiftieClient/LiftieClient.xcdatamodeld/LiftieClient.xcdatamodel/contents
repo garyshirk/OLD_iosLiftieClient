@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Lift" representedClassName="LiftieClient.Lift" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="resortId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="resort" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Resort" inverseName="lifts" inverseEntity="Resort" syncable="YES"/>
+    </entity>
     <entity name="Resort" representedClassName="LiftieClient.Resort">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="liftTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="lifts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lift" inverseName="resort" inverseEntity="Lift" syncable="YES"/>
         <userInfo/>
     </entity>
     <elements>
-        <element name="Resort" positionX="261" positionY="189" width="128" height="90"/>
+        <element name="Resort" positionX="261" positionY="189" width="128" height="103"/>
+        <element name="Lift" positionX="261" positionY="216" width="128" height="103"/>
     </elements>
 </model>

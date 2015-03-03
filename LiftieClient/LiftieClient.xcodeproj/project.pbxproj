@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E2511851AA64160002EEA3A /* Lift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2511841AA64160002EEA3A /* Lift.swift */; };
 		4E37DACA1A9A3767004C9017 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E37DAB51A9A3767004C9017 /* SwiftyJSON.swift */; };
 		4E4611C51A9A213C00116822 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4611C41A9A213C00116822 /* AppDelegate.swift */; };
 		4E4611C81A9A213C00116822 /* LiftieClient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E4611C61A9A213C00116822 /* LiftieClient.xcdatamodeld */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E2511841AA64160002EEA3A /* Lift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lift.swift; sourceTree = "<group>"; };
 		4E37DAB31A9A3767004C9017 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E37DAB41A9A3767004C9017 /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		4E37DAB51A9A3767004C9017 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				4E4611D21A9A213C00116822 /* LaunchScreen.xib */,
 				4E4611C61A9A213C00116822 /* LiftieClient.xcdatamodeld */,
 				4E4611E91A9A22DD00116822 /* Resort.swift */,
+				4E2511841AA64160002EEA3A /* Lift.swift */,
 				4E37DAB11A9A3767004C9017 /* SwiftyJsonLib */,
 				4E4611C21A9A213C00116822 /* Supporting Files */,
 			);
@@ -331,6 +334,7 @@
 				4E4611C51A9A213C00116822 /* AppDelegate.swift in Sources */,
 				4E4611C81A9A213C00116822 /* LiftieClient.xcdatamodeld in Sources */,
 				4E37DACA1A9A3767004C9017 /* SwiftyJSON.swift in Sources */,
+				4E2511851AA64160002EEA3A /* Lift.swift in Sources */,
 				4E4611CA1A9A213C00116822 /* MasterViewController.swift in Sources */,
 				4E57FEFC1A9A3C1D00FED8ED /* DataAccessManager.swift in Sources */,
 				4E4611CC1A9A213C00116822 /* DetailViewController.swift in Sources */,
