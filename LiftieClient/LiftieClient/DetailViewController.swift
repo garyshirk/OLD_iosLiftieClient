@@ -7,17 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     
-    //var resort: Resort!
+    var resort: Resort!
     
     var liftsArr: Array<Lift>!
-    
-    //var lifts: [String] = ["lift1", "lift2", "lift3"]
-
 
 //    var detailItem: AnyObject? {
 //        didSet {
@@ -28,19 +26,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     func configureView() {
         
-        self.tableView.reloadData()
+        let context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        var request = NSFetchRequest(entityName: "Lift")
+        request.predicate = NSPredicate(format: "resortId = %@", self.resort.id!)
+        self.liftsArr = context?.executeFetchRequest(request, error: nil) as? [Lift]
         
- 
+        self.tableView.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.configureView()
     }
-    
-//    func liftStatusForLift(liftName: NSString) -> NSString {
-//        return self.liftsMap[liftName]!.string!
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

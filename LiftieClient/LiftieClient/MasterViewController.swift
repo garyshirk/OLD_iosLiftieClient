@@ -205,15 +205,19 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let resort = self.fetchedResultsController.objectAtIndexPath(indexPath) as Resort
                 
-                var request = NSFetchRequest(entityName: "Lift")
-                request.predicate = NSPredicate(format: "resortId = %@", resort.id!)
-                let context = self.fetchedResultsController.managedObjectContext
-                let liftsArr = context.executeFetchRequest(request, error: nil) as? [Lift]
+//                var request = NSFetchRequest(entityName: "Lift")
+//                request.predicate = NSPredicate(format: "resortId = %@", resort.id!)
+//                let context = self.fetchedResultsController.managedObjectContext
+//                let liftsArr = context.executeFetchRequest(request, error: nil) as? [Lift]
                 let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
-                controller.liftsArr = liftsArr
+                //controller.liftsArr = liftsArr
+                
+                controller.resort = resort
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
+        } else if segue.identifier == "showResortInfo" {
+            println("info button clicked")
         }
     }
 
@@ -229,7 +233,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("ResortCell", forIndexPath: indexPath) as ResortCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -254,9 +258,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
 
-    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as NSManagedObject
-        cell.textLabel!.text = object.valueForKey("id")!.description
+    func configureCell(cell: ResortCell, atIndexPath indexPath: NSIndexPath) {
+        let resort = self.fetchedResultsController.objectAtIndexPath(indexPath) as Resort
+        cell.resortName!.text = resort.name
     }
 
     // MARK: - Fetched results controller
