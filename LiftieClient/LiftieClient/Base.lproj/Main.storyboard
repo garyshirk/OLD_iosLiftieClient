@@ -23,7 +23,7 @@
         <!--Resort Info-->
         <scene sceneID="9QP-qD-IrE">
             <objects>
-                <viewController id="u4O-U3-ulu" sceneMemberID="viewController">
+                <viewController id="u4O-U3-ulu" customClass="ResortInfoViewController" customModule="LiftieClient" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0zk-b1-ou4"/>
                         <viewControllerLayoutGuide type="bottom" id="VId-eE-raH"/>

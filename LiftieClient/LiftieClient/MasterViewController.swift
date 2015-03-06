@@ -201,24 +201,33 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        var controller: UIViewController!
+        
         if segue.identifier == "showResortDetail" {
+            
             if let indexPath = self.tableView.indexPathForSelectedRow() {
                 let resort = self.fetchedResultsController.objectAtIndexPath(indexPath) as Resort
-                
-//                var request = NSFetchRequest(entityName: "Lift")
-//                request.predicate = NSPredicate(format: "resortId = %@", resort.id!)
-//                let context = self.fetchedResultsController.managedObjectContext
-//                let liftsArr = context.executeFetchRequest(request, error: nil) as? [Lift]
                 let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
-                //controller.liftsArr = liftsArr
-                
                 controller.resort = resort
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                controller.navigationItem.leftItemsSupplementBackButton = true
+//                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+//                controller.navigationItem.leftItemsSupplementBackButton = true
             }
+            
         } else if segue.identifier == "showResortInfo" {
-            println("info button clicked")
+            
+            let row = (sender as UIButton).tag
+            let indexPath = NSIndexPath(forRow: row, inSection: 0)
+            let resort = self.fetchedResultsController.objectAtIndexPath(indexPath) as Resort
+            let controller = (segue.destinationViewController as UINavigationController).topViewController as ResortInfoViewController
+            controller.resort = resort
+//            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+//            controller.navigationItem.leftItemsSupplementBackButton = true
         }
+        
+        // TODO - Ok to have controller var outside of if/else? Also, don't understand use of optional here; without it, throws exception on nil controller
+        controller?.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+        controller?.navigationItem.leftItemsSupplementBackButton = true
     }
 
     // MARK: - Table View
@@ -260,6 +269,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     func configureCell(cell: ResortCell, atIndexPath indexPath: NSIndexPath) {
         let resort = self.fetchedResultsController.objectAtIndexPath(indexPath) as Resort
+        cell.infoButton.tag = indexPath.row
         cell.resortName!.text = resort.name
     }
 
