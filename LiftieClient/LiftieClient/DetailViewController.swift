@@ -12,9 +12,11 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     
-    var resort: Resort!
+    //var resort: Resort!
     
-    var lifts: [String] = ["lift1", "lift2", "lift3"]
+    var liftsArr: Array<Lift>!
+    
+    //var lifts: [String] = ["lift1", "lift2", "lift3"]
 
 
 //    var detailItem: AnyObject? {
@@ -35,6 +37,10 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         self.configureView()
     }
+    
+//    func liftStatusForLift(liftName: NSString) -> NSString {
+//        return self.liftsMap[liftName]!.string!
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -46,12 +52,18 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.lifts.count
+        return self.liftsArr.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:UITableViewCell = self.tableView.dequeueReusableCellWithIdentifier("liftCellId") as UITableViewCell
-        cell.textLabel?.text = lifts[indexPath.row]
+        
+        let lift = liftsArr[indexPath.row]
+        
+        cell.textLabel?.text = lift.name
+
+        cell.detailTextLabel?.text = lift.status
+        
         return cell
     }
     
