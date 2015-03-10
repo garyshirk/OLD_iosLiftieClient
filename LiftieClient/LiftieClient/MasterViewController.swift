@@ -353,7 +353,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 println(error?.localizedDescription)
             }
             
+            // update tableview for this viewcontroller
             self.tableView.reloadData()
+            
+            
+            // update tableview of detail vc (lift vc) in case this is a split view
+            if self.detailViewController != nil {
+                let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+                let resort = self.fetchedResultsController.objectAtIndexPath(indexPath) as Resort
+                self.detailViewController?.resort = resort
+                self.detailViewController?.configureView()
+            }
         }
     }
 }

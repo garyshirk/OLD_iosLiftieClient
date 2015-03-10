@@ -32,7 +32,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if self.resort?.id != nil {
             request.predicate = NSPredicate(format: "resortId = %@", self.resort.id!)
             self.liftsArr = context?.executeFetchRequest(request, error: nil) as? [Lift]
-            self.tableView.reloadData()
+            self.tableView?.reloadData()
         }
     }
 
