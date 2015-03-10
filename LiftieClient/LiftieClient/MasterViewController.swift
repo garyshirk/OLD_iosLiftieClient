@@ -210,8 +210,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 let resort = self.fetchedResultsController.objectAtIndexPath(indexPath) as Resort
                 let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
                 controller.resort = resort
-//                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-//                controller.navigationItem.leftItemsSupplementBackButton = true
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+                controller.navigationItem.leftItemsSupplementBackButton = true
             }
             
         } else if segue.identifier == "showResortInfo" {
@@ -221,16 +221,16 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let resort = self.fetchedResultsController.objectAtIndexPath(indexPath) as Resort
             let controller = (segue.destinationViewController as UINavigationController).topViewController as ResortInfoViewController
             controller.resort = resort
-//            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-//            controller.navigationItem.leftItemsSupplementBackButton = true
+            controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+            controller.navigationItem.leftItemsSupplementBackButton = true
         }
-        
-        // TODO - Ok to have controller var outside of if/else? Also, don't understand use of optional here; without it, throws exception on nil controller
-        controller?.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-        controller?.navigationItem.leftItemsSupplementBackButton = true
     }
 
     // MARK: - Table View
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80
+    }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0

@@ -28,10 +28,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let context = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         var request = NSFetchRequest(entityName: "Lift")
-        request.predicate = NSPredicate(format: "resortId = %@", self.resort.id!)
-        self.liftsArr = context?.executeFetchRequest(request, error: nil) as? [Lift]
         
-        self.tableView.reloadData()
+        if self.resort?.id != nil {
+            request.predicate = NSPredicate(format: "resortId = %@", self.resort.id!)
+            self.liftsArr = context?.executeFetchRequest(request, error: nil) as? [Lift]
+            self.tableView.reloadData()
+        }
     }
 
     override func viewDidLoad() {
@@ -49,7 +51,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.liftsArr.count
+        
+        if self.liftsArr == nil {
+            return 0
+        } else {
+            return self.liftsArr.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

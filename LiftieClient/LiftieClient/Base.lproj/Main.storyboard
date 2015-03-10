@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -139,7 +139,7 @@
                                             </constraints>
                                             <state key="normal" title="info"/>
                                             <connections>
-                                                <segue destination="Xv7-FJ-nkf" kind="show" identifier="showResortInfo" id="WJ3-y5-VMn"/>
+                                                <segue destination="Xv7-FJ-nkf" kind="showDetail" identifier="showResortInfo" id="WJ3-y5-VMn"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resort Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ziM-DS-v7T">
@@ -161,7 +161,7 @@
                                 <connections>
                                     <outlet property="infoButton" destination="qf0-ZQ-h4f" id="CpR-fe-N26"/>
                                     <outlet property="resortName" destination="ziM-DS-v7T" id="Z3g-Vu-KLc"/>
-                                    <segue destination="vC3-pB-5Vb" kind="show" identifier="showResortDetail" id="PbC-14-wOg"/>
+                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showResortDetail" id="PbC-14-wOg"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
