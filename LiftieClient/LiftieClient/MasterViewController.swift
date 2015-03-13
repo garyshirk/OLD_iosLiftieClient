@@ -129,26 +129,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                         
                         // insert the new resort to core data
                         var liftTimeStamp = NSDate(timeIntervalSince1970: liftTimeRetrieved)
-                        
                         self.insertNewResortWithId(resortId, liftTimeStamp: liftTimeStamp, json: json)
                         
-                        
                         // insert the lifts for the given resort to core data
-                        liftStatusJsonMap = self.liftStatusDict(json)
-                        
-                        var liftNameArr = [String](liftStatusJsonMap.keys)
-                        
-                        for liftName in liftNameArr {
-                            
-                            let liftEntity = NSEntityDescription.insertNewObjectForEntityForName("Lift", inManagedObjectContext: self.managedObjectContext!) as? Lift
-                            liftEntity?.name = liftName
-                            liftEntity?.resortId = resortId
-                            
-                            var liftStatus: String = liftStatusJsonMap[liftName]!.string!
-                            liftEntity?.status = liftStatus
-                            
-                            println("resortId: \(resortId), liftName: \(liftName), liftStatus: \(liftStatus)")
-                        }
+                        self.insertNewLiftsForResort(resortId, json: json)
+
                     }
                 }
             }
@@ -182,6 +167,25 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         resortEntity?.conditions = conditions
     }
     
+    func insertNewLiftsForResort(resortId: NSString, json: JSON) {
+        
+        var liftStatusJsonMap = self.liftStatusDict(json)
+        
+        var liftNameArr = [String](liftStatusJsonMap.keys)
+        
+        for liftName in liftNameArr {
+            
+            let liftEntity = NSEntityDescription.insertNewObjectForEntityForName("Lift", inManagedObjectContext: self.managedObjectContext!) as? Lift
+            liftEntity?.name = liftName
+            liftEntity?.resortId = resortId
+            
+            var liftStatus: String = liftStatusJsonMap[liftName]!.string!
+            liftEntity?.status = liftStatus
+            
+            println("resortId: \(resortId), liftName: \(liftName), liftStatus: \(liftStatus)")
+        }
+    }
+    
     func liftStatusDict(json: JSON) -> Dictionary<String, JSON> {
         let liftStatusJsonDict = json["lifts"]["status"].dictionaryValue as Dictionary?
 //        println("lift dictionary: \(liftStatusJsonDict)")
@@ -191,8 +195,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         return liftStatusJsonDict!
     }
     
-    func insertNewObject(sender: AnyObject) {
-        
+//    func insertNewObject(sender: AnyObject) {
+//        
 //        let context = self.fetchedResultsController.managedObjectContext
 //        let entity = self.fetchedResultsController.fetchRequest.entity!
 //        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context) as NSManagedObject
@@ -209,7 +213,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 //            //println("Unresolved error \(error), \(error.userInfo)")
 //            abort()
 //        }
-    }
+//    }
 
     // MARK: - Segues
 
