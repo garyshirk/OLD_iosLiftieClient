@@ -22,6 +22,7 @@
 		4E57FEEE1A9A392C00FED8ED /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E37DADF1A9A3768004C9017 /* SwiftyJSON.framework */; };
 		4E57FEFC1A9A3C1D00FED8ED /* DataAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E57FEFB1A9A3C1D00FED8ED /* DataAccessManager.swift */; };
 		4E91CC561AAA5FD800BE400B /* ResortInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E91CC551AAA5FD800BE400B /* ResortInfoViewController.swift */; };
+		4EA849F71AB0DC9C00107F93 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA849F61AB0DC9C00107F93 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,7 @@
 		4E4611E91A9A22DD00116822 /* Resort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resort.swift; sourceTree = "<group>"; };
 		4E57FEFB1A9A3C1D00FED8ED /* DataAccessManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataAccessManager.swift; sourceTree = "<group>"; };
 		4E91CC551AAA5FD800BE400B /* ResortInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResortInfoViewController.swift; sourceTree = "<group>"; };
+		4EA849F61AB0DC9C00107F93 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EA849F71AB0DC9C00107F93 /* MapKit.framework in Frameworks */,
 				4E57FEEE1A9A392C00FED8ED /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +141,7 @@
 		4E4611B61A9A213C00116822 = {
 			isa = PBXGroup;
 			children = (
+				4EA849F61AB0DC9C00107F93 /* MapKit.framework */,
 				4E4611C11A9A213C00116822 /* LiftieClient */,
 				4E4611DC1A9A213C00116822 /* LiftieClientTests */,
 				4E4611C01A9A213C00116822 /* Products */,

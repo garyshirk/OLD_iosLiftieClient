@@ -8,9 +8,16 @@
 
 import UIKit
 import CoreData
+import MapKit
 
 class ResortInfoViewController: UIViewController {
 
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
     var resort: Resort? = nil
 
     override func viewDidLoad() {
