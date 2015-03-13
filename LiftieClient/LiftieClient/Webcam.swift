@@ -1,5 +1,5 @@
 //
-//  Lift.swift
+//  Webcam.swift
 //  LiftieClient
 //
 //  Created by Gary Shirk on 3/3/15.
@@ -9,11 +9,11 @@
 import Foundation
 import CoreData
 
-class Lift: NSManagedObject {
-
+class Webcam: NSManagedObject {
+    
     @NSManaged var resortId: String?
     @NSManaged var name: String?
-    @NSManaged var status: String?
-    @NSManaged var resort: LiftieClient.Resort
-
+    @NSManaged var imageUrl: String?
+    @NSManaged var resort: LiftieClient.Webcam
+    
 }

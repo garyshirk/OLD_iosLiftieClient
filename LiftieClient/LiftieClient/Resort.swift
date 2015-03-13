@@ -13,7 +13,10 @@ class Resort: NSManagedObject {
 
     @NSManaged var id: String?
     @NSManaged var name: String?
+    @NSManaged var conditions: String?
+    @NSManaged var temperature: String?
     @NSManaged var liftTimestamp: NSDate?
     @NSManaged var lifts: LiftieClient.Lift
+    @NSManaged var webcams: LiftieClient.Webcam
 
 }

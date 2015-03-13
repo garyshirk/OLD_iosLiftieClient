@@ -117,7 +117,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                             if let liftResults = context.executeFetchRequest(request, error: nil) as? [Lift] {
                                 for lift in liftResults {
                                     let liftName = lift.name
-                                    let newLiftStatus: String = liftStatusJsonMap[liftName]!.string!
+                                    let newLiftStatus: String = liftStatusJsonMap[liftName!]!.string!
                                     lift.status = newLiftStatus
                                 }
                             }
@@ -128,14 +128,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                         // resort for the current resortId was not found in core data
                         
                         // insert the new resort to core data
-                        var resortName: NSString = "error"
-                        if let name = json["name"].stringValue as NSString? {
-                            resortName = name
-                        }
-                        
                         var liftTimeStamp = NSDate(timeIntervalSince1970: liftTimeRetrieved)
                         
-                        self.insertNewResortWithId(resortId, resortName: resortName, liftTimeStamp: liftTimeStamp)
+                        self.insertNewResortWithId(resortId, liftTimeStamp: liftTimeStamp, json: json)
                         
                         
                         // insert the lifts for the given resort to core data
@@ -162,11 +157,29 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         return liftStatusJsonMap
     }
     
-    func insertNewResortWithId(resortId: NSString, resortName: NSString, liftTimeStamp: NSDate) {
+    func insertNewResortWithId(resortId: NSString, liftTimeStamp: NSDate, json: JSON) {
         let resortEntity = NSEntityDescription.insertNewObjectForEntityForName("Resort", inManagedObjectContext: self.managedObjectContext!) as? Resort
+        
+        var resortName: NSString = ""
+        if let name = json["name"].stringValue as NSString? {
+            resortName = name
+        }
+        
+        var temperature: NSString = ""
+        if let temp = json["weather"]["temperature"]["max"].stringValue as NSString? {
+            temperature = temp
+        }
+        
+        var conditions: NSString = ""
+        if let cond = json["weather"]["conditions"].stringValue as NSString? {
+            conditions = cond
+        }
+        
         resortEntity?.id = resortId
         resortEntity?.name = resortName
         resortEntity?.liftTimestamp = liftTimeStamp
+        resortEntity?.temperature = temperature
+        resortEntity?.conditions = conditions
     }
     
     func liftStatusDict(json: JSON) -> Dictionary<String, JSON> {
