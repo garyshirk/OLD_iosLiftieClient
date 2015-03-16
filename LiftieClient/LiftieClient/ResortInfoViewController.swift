@@ -27,9 +27,9 @@ class ResortInfoViewController: UIViewController, MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.navigationItem.title = resort?.name
+        self.segmentControl.setTitle("Map", forSegmentAtIndex: 0)
+        self.segmentControl.setTitle("Info", forSegmentAtIndex: 1)
         
-        // TODO - for now working on the map view, so hide tableview
         mapViewContainer.hidden = false
         tableView.hidden = true
         
@@ -73,6 +73,22 @@ class ResortInfoViewController: UIViewController, MKMapViewDelegate {
         
     }
     
+    @IBAction func viewIndexChanged(sender: UISegmentedControl) {
+        println("segment control index changed")
+        switch self.segmentControl.selectedSegmentIndex
+        {
+        case 0:
+            NSLog("0 selected")
+            self.mapViewContainer.hidden = false
+            self.tableView.hidden = true
+        case 1:
+            NSLog("1 selected")
+            self.mapViewContainer.hidden = true
+            self.tableView.hidden = false
+        default:
+            break;
+        }
+    }
 
     /*
     // MARK: - Navigation
