@@ -160,11 +160,20 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             conditions = cond
         }
         
+        var lat: Double = 0
+        var long: Double = 0
+        if let locArray = json["ll"].arrayValue as Array? {
+            lat = locArray[1].doubleValue
+            long = locArray[0].doubleValue
+        }
+        
         resortEntity?.id = resortId
         resortEntity?.name = resortName
         resortEntity?.liftTimestamp = liftTimeStamp
         resortEntity?.temperature = temperature
         resortEntity?.conditions = conditions
+        resortEntity?.latitude = NSNumber(double: lat)
+        resortEntity?.longitude = NSNumber(double: long)
     }
     
     func insertNewLiftsForResort(resortId: NSString, json: JSON) {

@@ -11,7 +11,9 @@
     <entity name="Resort" representedClassName="LiftieClient.Resort">
         <attribute name="conditions" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="liftTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="temperature" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="lifts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Lift" inverseName="resort" inverseEntity="Lift" syncable="YES"/>
@@ -26,7 +28,7 @@
     </entity>
     <elements>
         <element name="Lift" positionX="261" positionY="216" width="128" height="135"/>
-        <element name="Resort" positionX="261" positionY="189" width="128" height="148"/>
+        <element name="Resort" positionX="261" positionY="189" width="128" height="180"/>
         <element name="Webcam" positionX="270" positionY="252" width="128" height="103"/>
     </elements>
 </model>

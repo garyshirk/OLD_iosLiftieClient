@@ -15,6 +15,8 @@ class Resort: NSManagedObject {
     @NSManaged var name: String?
     @NSManaged var conditions: String?
     @NSManaged var temperature: String?
+    @NSManaged var latitude: NSNumber?
+    @NSManaged var longitude: NSNumber?
     @NSManaged var liftTimestamp: NSDate?
     @NSManaged var lifts: LiftieClient.Lift
     @NSManaged var webcams: LiftieClient.Webcam

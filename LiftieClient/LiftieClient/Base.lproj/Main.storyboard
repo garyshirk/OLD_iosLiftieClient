@@ -32,10 +32,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7er-pn-J8g">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" red="0.38440038580000002" green="0.96959226860000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="c5h-5B-RwZ">
                                 <rect key="frame" x="0.0" y="64" width="600" height="542"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,17 +45,49 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TNJ-ZI-IKy" userLabel="Map View">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7er-pn-J8g" userLabel="MKMapView">
+                                        <rect key="frame" x="0.0" y="-1" width="600" height="479"/>
+                                        <color key="backgroundColor" red="0.38440038580000002" green="0.96959226860000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </mapView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-123.456789" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZT-WO-Fea">
+                                        <rect key="frame" x="8" y="499" width="98" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-987.65432" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIT-kN-VRx">
+                                        <rect key="frame" x="114" y="499" width="88" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="DZT-WO-Fea" firstAttribute="leading" secondItem="TNJ-ZI-IKy" secondAttribute="leading" constant="8" id="1eb-rF-3GD"/>
+                                    <constraint firstItem="7er-pn-J8g" firstAttribute="leading" secondItem="TNJ-ZI-IKy" secondAttribute="leading" id="BQO-iq-Iwf"/>
+                                    <constraint firstItem="7er-pn-J8g" firstAttribute="top" secondItem="TNJ-ZI-IKy" secondAttribute="top" constant="-1" id="Jpy-pX-jXr"/>
+                                    <constraint firstAttribute="bottom" secondItem="DZT-WO-Fea" secondAttribute="bottom" constant="16" id="Z4E-9E-oaG"/>
+                                    <constraint firstAttribute="bottom" secondItem="7er-pn-J8g" secondAttribute="bottom" constant="58" id="cMs-K3-c9K"/>
+                                    <constraint firstAttribute="bottom" secondItem="YIT-kN-VRx" secondAttribute="bottom" constant="16" id="dr7-rb-BR5"/>
+                                    <constraint firstAttribute="trailing" secondItem="7er-pn-J8g" secondAttribute="trailing" id="eK5-6n-aye"/>
+                                    <constraint firstItem="YIT-kN-VRx" firstAttribute="leading" secondItem="DZT-WO-Fea" secondAttribute="trailing" constant="8" id="ztj-Dy-b2O"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7er-pn-J8g" firstAttribute="leading" secondItem="x17-Kd-elI" secondAttribute="leadingMargin" constant="-16" id="0es-qK-AeJ"/>
+                            <constraint firstItem="TNJ-ZI-IKy" firstAttribute="top" secondItem="0zk-b1-ou4" secondAttribute="bottom" id="2EJ-dF-lfl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="c5h-5B-RwZ" secondAttribute="trailing" constant="-16" id="FE3-lT-cBI"/>
+                            <constraint firstItem="TNJ-ZI-IKy" firstAttribute="leading" secondItem="x17-Kd-elI" secondAttribute="leadingMargin" constant="-16" id="Xvr-fF-LbS"/>
                             <constraint firstItem="c5h-5B-RwZ" firstAttribute="leading" secondItem="x17-Kd-elI" secondAttribute="leadingMargin" constant="-16" id="YXF-1r-uum"/>
                             <constraint firstItem="VId-eE-raH" firstAttribute="top" secondItem="c5h-5B-RwZ" secondAttribute="bottom" constant="-6" id="ZOr-ci-vO0"/>
                             <constraint firstItem="c5h-5B-RwZ" firstAttribute="top" secondItem="0zk-b1-ou4" secondAttribute="bottom" id="gKb-a0-sdh"/>
-                            <constraint firstItem="7er-pn-J8g" firstAttribute="top" secondItem="0zk-b1-ou4" secondAttribute="bottom" id="oSW-3f-7DT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7er-pn-J8g" secondAttribute="trailing" constant="-16" id="qAh-zW-Sbw"/>
-                            <constraint firstItem="VId-eE-raH" firstAttribute="top" secondItem="7er-pn-J8g" secondAttribute="bottom" id="uhj-sl-AgH"/>
+                            <constraint firstItem="VId-eE-raH" firstAttribute="top" secondItem="TNJ-ZI-IKy" secondAttribute="bottom" id="kHH-Du-NjI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TNJ-ZI-IKy" secondAttribute="trailing" constant="-16" id="lfC-Aj-Dv9"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EaC-P6-SEx">
@@ -74,7 +102,10 @@
                         </segmentedControl>
                     </navigationItem>
                     <connections>
-                        <outlet property="mapView" destination="7er-pn-J8g" id="5Od-yV-kPn"/>
+                        <outlet property="latLabel" destination="DZT-WO-Fea" id="f45-an-mkk"/>
+                        <outlet property="longLabel" destination="YIT-kN-VRx" id="wBT-kB-uQw"/>
+                        <outlet property="mapViewContainer" destination="TNJ-ZI-IKy" id="Nob-MB-MOl"/>
+                        <outlet property="mkMapView" destination="7er-pn-J8g" id="PX2-ym-wJL"/>
                         <outlet property="segmentControl" destination="EOO-Jy-sHS" id="Fu7-rd-aCX"/>
                         <outlet property="tableView" destination="c5h-5B-RwZ" id="cOc-Vc-ppX"/>
                     </connections>
